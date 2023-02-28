@@ -67,29 +67,24 @@ plot(x,                                                                         
      font.sub  = 2,
      font.axis = 3,
      font.lab  = 4,
-     
 )
 
 edf <- function(X) {                                                                # Эмпирическая функция распределения (ЭФР), см на стр. 58
-  acc <- 0
+  a <- 0
   for (i in 1:n) {
-    acc <- acc + (x[i] < X)
+    a <- a + (x[i] < X)
   }
-  acc / n
+  a / n
 }
 
 
 edf.points <- append(append(unique(x.varied), Inf), -Inf, 0)                        # Точки из выборки без повторений с бесконечностями по краям. Диапозон от -Inf до Inf.
 
 for (i in 1:(length(edf.points) - 1)) {                                             # Рендеринг на пространстве эмпирической функции распределения
-  left <- edf.points[i]
-  h <- edf(left)
-  right <- edf.points[i + 1]
-  segments(
-    left, h,
-    right, h,
-    col = "#30E3CA"
-  )
+  l <- edf.points[i]
+  h <- edf(l)
+  r <- edf.points[i + 1]
+  segments(l, h, r, h, col = "#30E3CA")
 }
 
 # Гистограмма (аля, ступенчатая кривая, см. стр. 55)
@@ -97,31 +92,27 @@ for (i in 1:(length(edf.points) - 1)) {                                         
 
 k <- floor(n / 10)
 del <- (max.x - min.x) / (k - 1)
-histogram.points <- append(append(seq( 
- min.x + del / 2,
- max.x - del / 2,
- del
-), Inf), -Inf, 0)
+histogram.points <- append(append(seq(min.x + del / 2, max.x - del / 2, del), Inf), -Inf, 0)
 
 histogram <- function(column.number) {
-  left <- histogram.points[column.number - 1]
-  right <- histogram.points[column.number]
-  acc <- 0
+  l <- histogram.points[column.number - 1]
+  r <- histogram.points[column.number]
+  a <- 0
   for (i in 1:n) {
-    acc <- acc + ((x[i] >= left) && (x[i] < right))
+    a <- a + ((x[i] >= l) && (x[i] < r))
   }
-  acc / n / del
+  a / n / del
 }
 
 for (i in 2:(length(histogram.points))) {
-  height <- histogram(i)
-  rect(histogram.points[i - 1], 0, histogram.points[i], height, col = "#F9F9F9")    # Рендеринг гистограммы
+  h <- histogram(i)
+  rect(histogram.points[i - 1], 0, histogram.points[i], h, col = "#F9F9F9")    # Рендеринг гистограммы
 }
 
 f <- function(x) {
-  denominator <- sigma * sqrt(2 * pi)
-  power <- (-1 / 2) * (((x - x_middle) / sigma) ^ 2)
-  exp(power) / denominator
+  denom <- sigma * sqrt(2 * pi)
+  pow <- (-1 / 2) * (((x - x_middle) / sigma) ^ 2)
+  exp(pow) / denom
 }
 
 plot(f, min.x, max.x, add = TRUE, sub = "", col = '#E84545')                        # Рендерим красную линию (Эмпирическая функция распределения)
@@ -142,3 +133,4 @@ cat(                                                                            
  "\n Интерквартильная широта:", Q(3 / 4) - Q(1 / 4),
  "\n Мода:", mode.of(x)
 )
+
