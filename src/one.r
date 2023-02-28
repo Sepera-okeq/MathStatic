@@ -50,7 +50,7 @@ mode.of <- function(x) {                                                        
   uniq[which.max(tabulate(match(x, uniq)))]
 }
 
-#windows()                                                                          # Создадим новое окно
+windows()                                                                          # Создадим новое окно
 par(bg = "#f7f7f7")
 
 plot(x,                                                                             # Предварительнаая генерация графика
