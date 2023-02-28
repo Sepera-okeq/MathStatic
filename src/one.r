@@ -22,7 +22,7 @@ library(ggplot2)
 library(plotly)
 
 x <- read.csv(file = '~/MathStatic/materials/6/r1z1.csv')$X # Считывание из csv файла данных X
-x.varied <- sort(x) # Сортируем в порядке возростания
+x.varied <- sort(x)                                         # Сортируем в порядке возростания
 
 # Предварительные данные из массива:
 min.x <- min(x) # Находим минимальный X
@@ -132,18 +132,19 @@ for (i in 2:(length(histogram.points))) {
   rect(histogram.points[i - 1], 0, histogram.points[i], h, col = "#F9F9F9") # Рендеринг гистограммы
 }
 
+# Функция плотности, см на стр 14.
 f <- function(x) {
   denom <- sigma * sqrt(2 * pi)
   pow <- (-1 / 2) * (((x - x_middle) / sigma) ^ 2)
   exp(pow) / denom
 }
 
-plot(f,
+plot(f,  # Рендерим красную линию (Функция плотности)
      min.x,
      max.x,
      add = TRUE,
      sub = "",
-     col = '#E84545') # Рендерим красную линию (Функция плотности)
+     col = '#E84545')
 
 
 cat(# Финальные данные выводим в консоль
