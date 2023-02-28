@@ -96,11 +96,11 @@ for (i in 1:(length(edf.points) - 1)) {                                         
 # Диапозон от -Inf до Inf.
 
 k <- floor(n / 10)
-delta <- (max.x - min.x) / (k - 1)
+del <- (max.x - min.x) / (k - 1)
 histogram.points <- append(append(seq( 
- min.x + delta / 2,
- max.x - delta / 2,
- delta
+ min.x + del / 2,
+ max.x - del / 2,
+ del
 ), Inf), -Inf, 0)
 
 histogram <- function(column.number) {
@@ -110,7 +110,7 @@ histogram <- function(column.number) {
   for (i in 1:n) {
     acc <- acc + ((x[i] >= left) && (x[i] < right))
   }
-  acc / n / delta
+  acc / n / del
 }
 
 for (i in 2:(length(histogram.points))) {
