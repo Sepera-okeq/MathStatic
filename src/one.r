@@ -115,7 +115,7 @@ histogram <- function(column.number) {
 
 for (i in 2:(length(histogram.points))) {
   height <- histogram(i)
-  rect(histogram.points[i - 1], 0, histogram.points[i], height, col = "#F9F9F9")
+  rect(histogram.points[i - 1], 0, histogram.points[i], height, col = "#F9F9F9")    # Рендеринг гистограммы
 }
 
 f <- function(x) {
