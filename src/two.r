@@ -16,7 +16,7 @@ plot(x, y)
 
 # Equivalent
 M <- cbind(x, y)
-plot(M)
+plot(M, main = "Диаграмма распределения и регресии",)
 
 min.x <- min(x) # Находим минимальный X
 max.x <- max(x) # Находим максимальный X
